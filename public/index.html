@@ -15,6 +15,28 @@
     <div class="container">
       <a class="logo" href="index.html"><span class="logo-mark"></span>Calico Media</a>
       <nav aria-label="Main">
+        
+        <button 
+        class="menu-toggle"
+        type="button"
+        aria-label="open menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation">
+
+        <svg class="menu-icon menu-icon--hamburger" viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+
+        <svg class="menu-icon menu-icon--close" viewBox="0 0 24 24" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav id="primary-navigation" class="site-nav" aria label="Main">
+
         <ul class="nav-links">
           <li><a href="features.html">Features</a></li>
           <li><a href="pricing.html">Pricing</a></li>
@@ -25,6 +47,8 @@
           <li><a class="btn" href="contact.html">Book a demo</a></li>
         </ul>
       </nav>
+      </nav>
+      </div>
     </div>
   </header>
 
@@ -188,5 +212,29 @@
       </div>
     </div>
   </footer>
+  
+  <script>
+  const menuButton = document.querySelector(".menu-toggle");
+  const navigation = document.querySelector("#primary-navigation");
+
+  menuButton.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+
+    menuButton.setAttribute("aria-expanded", String(!isOpen));
+    menuButton.setAttribute(
+      "aria-label",
+      isOpen ? "Open menu" : "Close menu"
+    );
+    navigation.classList.toggle("is-open", !isOpen);
+  });
+
+  navigation.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Open menu");
+      navigation.classList.remove("is-open");
+    });
+  });
+</script>
 </body>
 </html>
